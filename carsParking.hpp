@@ -10,7 +10,6 @@ class CarNode{
     public:
         string* data;
         CarNode* nextNode;
-        CarNode* prevNode;
 };
 
 class CarsParking{
