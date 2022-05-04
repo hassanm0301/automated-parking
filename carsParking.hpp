@@ -6,7 +6,7 @@
 using namespace std;
 
 // Class one node of the doubly linked list
-class CarNode{
+class DLLCarNode{
     public:
         string* data;
         CarNode* nextNode;

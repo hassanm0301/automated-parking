@@ -7,7 +7,7 @@ CarsParking::CarsParking(){
 };
 
 void CarsParking::append(std::string* data){
-    CarNode* new_node = new CarNode;
+    DLLCarNode* new_node = new DLLCarNode;
     new_node->data = data;
     if (head == NULL){
         head = new_node;
@@ -22,7 +22,7 @@ void CarsParking::append(std::string* data){
 };
 
 void CarsParking::printList(){
-    CarNode* temp = head;
+    DLLCarNode* temp = head;
     while (true){
         for (int i=0; i<3; i++){
             cout<<temp->data[i]<<", ";
@@ -36,7 +36,7 @@ void CarsParking::printList(){
 };
 
 void CarsParking::del(std::string plateNum){
-    CarNode* temp = head;
+    DLLCarNode* temp = head;
     if (temp->data[1] != plateNum){
         while((temp->nextNode)->data[1] != plateNum){
                 temp = temp->nextNode;
