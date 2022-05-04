@@ -2,16 +2,16 @@
 #define _CARSHISTORY_HPP_
 #include <iostream>
 
-class CarNode{
+class HTCarNode{
     public:
         std::string* data;
-        CarNode* nextNode;
-        CarNode();
+        HTCarNode* nextNode;
+        HTCarNode();
 };
 
 class CarsHistory{
     private:
-        CarNode** bucket;
+        HTCarNode** bucket;
         int bucketSize;
         std::string hash(std::string);
     public:
