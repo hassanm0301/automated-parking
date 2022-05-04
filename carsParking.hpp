@@ -9,12 +9,12 @@ using namespace std;
 class DLLCarNode{
     public:
         string* data;
-        CarNode* nextNode;
+        DLLCarNode* nextNode;
 };
 
 class CarsParking{
     private:
-        CarNode* head;
+        DLLCarNode* head;
 
     public:
         CarsParking();
