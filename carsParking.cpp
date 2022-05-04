@@ -1,13 +1,12 @@
 #include "carsParking.hpp"
 #include <iostream>
 
-using namespace std;
 
 CarsParking::CarsParking(){
     head = NULL;
 };
 
-void CarsParking::append(string* data){
+void CarsParking::append(std::string* data){
     CarNode* new_node = new CarNode;
     new_node->data = data;
     if (head == NULL){
@@ -36,7 +35,7 @@ void CarsParking::printList(){
     };
 };
 
-void CarsParking::del(string plateNum){
+void CarsParking::del(std::string plateNum){
     CarNode* temp = head;
     if (temp->data[1] != plateNum){
         while((temp->nextNode)->data[1] != plateNum){
