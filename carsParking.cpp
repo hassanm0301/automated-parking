@@ -1,6 +1,5 @@
 #include "carsParking.hpp"
 #include <iostream>
-#include <typeinfo>
 
 using namespace std;
 
