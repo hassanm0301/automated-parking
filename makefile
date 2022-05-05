@@ -19,3 +19,4 @@ clean:
 	rm -f *.o
 	rm -f *.exe
 	rm -f *.txt
+	rm -f *.stackdump
