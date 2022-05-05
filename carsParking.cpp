@@ -24,7 +24,7 @@ void CarsParking::append(std::string* data){
 void CarsParking::printList(){
     DLLCarNode* temp = head;
     while (true){
-        for (int i=0; i<3; i++){
+        for (int i=0; i<4; i++){
             cout<<temp->data[i]<<", ";
         }
         cout<<"\n";
