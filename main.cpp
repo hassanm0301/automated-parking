@@ -13,6 +13,33 @@ void clrScr(){
     }
 }
 
+string calcFee(string arrival, string departure){
+    int duration = 0;
+    int hours = stoi(departure.substr(0,2)) - stoi(arrival.substr(0,2));
+    int min = stoi(departure.substr(3,2)) - stoi(arrival.substr(3,2));
+    int sec = stoi(departure.substr(6,2)) - stoi(arrival.substr(6,2));
+
+    duration = sec + (min*60) + (hours*60*60);
+
+    if(duration<(30*60)){
+        return "FREE";
+    }
+    else if(duration<=(1*60*60)){
+        return "$1.50";
+    }
+    else if(duration<=(2*60*60)){
+        return "$3.00";
+    }
+    else if(duration<=(4*60*60)){
+        return "$5.00";
+    }
+    else if(duration<=(8*60*60)){
+        return "$15.00";
+    }
+    return "$30.00";
+
+}
+
 string twoIntegers(int oneInteger){
     if(oneInteger < 10){
         return to_string(0)+to_string(oneInteger);
@@ -107,6 +134,7 @@ void removeVehicle(CarsParking* parking, CarsHistory* history){
     data[0] = getCurrentDate();
     data[3] = getCurrentTime();
     history->insert(data);
+    cout<<calcFee(data[2], data[3]);
     cin.get();
     cin.get();
     parking->del(vrn);
