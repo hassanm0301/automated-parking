@@ -19,7 +19,8 @@ class CarsParking{
     public:
         CarsParking();
         void append(string* data);
-        void del(string plateNum);
+        void del(string vrn);
+        string* getData(string vrn);
         void printList();
 };
 
