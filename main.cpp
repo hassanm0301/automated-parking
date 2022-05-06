@@ -190,13 +190,11 @@ void exportFile(CarsHistory* History, CarsParking* Parking){
     cout<<endl<<"Enter the file name:";
     cin>>fileName;
 
-    ofstream file(fileName);
-    ofstream* fileptr = &file;
     if(date == getCurrentDate()){ // puts cars in parking to file if date is today
-        Parking->fileData(fileptr);
+        cout<<"today";
+        Parking->fileData(fileName);
     }
-    History->fileDay(fileptr, date);
-    *fileptr<<"\n";
+    History->fileDay(fileName, date);
 }
 
 // main driver function
@@ -251,6 +249,8 @@ int main(){
                 cin>>date;
                 clrScr();
                 History->printDay(date);
+                cin.get();
+                cin.get();
                 break;
             }
             case 6:
