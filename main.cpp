@@ -23,7 +23,7 @@ string calcFee(string arrival, string departure){
     int min = stoi(departure.substr(3,2)) - stoi(arrival.substr(3,2));
     int sec = stoi(departure.substr(6,2)) - stoi(arrival.substr(6,2));
 
-    duration = sec + (min*60) + (hours*60*60);
+    duration = sec + (min*60) + (hours*60*60); //duration to seconds
 
     cout<<"Parking charge is: ";
     if(duration<(30*60)){
@@ -56,7 +56,7 @@ string twoIntegers(int oneInteger){
 // gets current date to format DD/MM/YYY
 string getCurrentDate(){
     time_t now = time(0);
-    tm *ltm = localtime(&now);
+    tm *ltm = localtime(&now); // time from UNIX stimestamp
 
     string day = twoIntegers(ltm->tm_mday);
     string month = twoIntegers(1 + ltm->tm_mon);
