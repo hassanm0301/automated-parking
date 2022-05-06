@@ -20,7 +20,6 @@ CarsHistory::CarsHistory(){
         HTCarNode* nullNode = new HTCarNode(nullptr);
         bucket[i] = nullNode;
     };
-    cout<<bucketSize;
 };
 
 // hashing function
@@ -74,9 +73,7 @@ void CarsHistory::printDay(std::string day){
         for(int i=0; i<4; i++){
             std::cout<<head->data[i]<<", ";
         }
-        std::cout<<head->nextNode;
         if(!(head->nextNode)){
-            std::cout<<head->nextNode;
             break;
         }
         head = head->nextNode;
@@ -85,7 +82,9 @@ void CarsHistory::printDay(std::string day){
 };
 
 // appends data of particular day to a file
-void CarsHistory::fileDay(ofstream* file, string day){
+void CarsHistory::fileDay(string filename, string day){
+    ofstream file;
+    file.open(filename, fstream::app);
     int header = hashToInt(day);
     if(bucket[header] == nullptr){
         std::cout<<"Error! No entry found on that date.";
@@ -94,14 +93,13 @@ void CarsHistory::fileDay(ofstream* file, string day){
     HTCarNode* head = bucket[header];
     do{
         for(int i=0; i<4; i++){
-            *file<<head->data[i]<<", ";
+            file<<head->data[i]<<", ";
         }
-        *file<<head->nextNode;
         if(!(head->nextNode)){
-            *file<<head->nextNode;
             break;
         }
         head = head->nextNode;
-        *file<<endl;
+        file<<endl;
     }while(head->nextNode != nullptr);
+    file.close();
 };

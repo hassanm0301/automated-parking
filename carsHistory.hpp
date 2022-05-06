@@ -21,7 +21,7 @@ class CarsHistory{
         void insert(std::string* data);
         void printDay(std::string);
         int hashToInt(std::string date);
-        void fileDay(ofstream* file, string day);
+        void fileDay(string filename, string day);
 };
 
 #endif

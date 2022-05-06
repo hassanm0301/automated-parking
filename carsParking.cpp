@@ -41,18 +41,22 @@ void CarsParking::printList(){
 };
 
 // appends all data to a file
-void CarsParking::fileData(ofstream* file){
+void CarsParking::fileData(string filename){
+    ofstream file;
+    file.open(filename, fstream::app);
     DLLCarNode* temp = head;
     while (true){
         for (int i=0; i<3; i++){
-            *file<<temp->data[i]<<", ";
+            cout<<temp->data[i];
+            file<<temp->data[i]<<", ";
         }
-        *file<<"\n";
+        file<<"\n";
         if (temp->nextNode == NULL){
             return;
         }
         temp = temp->nextNode;
     };
+    file.close();
 };
 
 // removes a node by pointing it to null and deleting it
