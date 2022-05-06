@@ -1,15 +1,22 @@
 #include "carsHistory.hpp"
 #include <iostream>
 
-HTCarNode::HTCarNode(){
-    this->data = NULL;
-    this->nextNode = NULL;
+using namespace std;
+
+HTCarNode::HTCarNode(nullptr_t ptr){
+    this->data = ptr;
+    this->nextNode = ptr;
 }
 
-
 CarsHistory::CarsHistory(){
-    int bucketSize = 30;
+    int bucketSize = 237886;
     HTCarNode** bucket = new HTCarNode*[bucketSize];
+    for(int i=0; i<bucketSize; i++){
+        delete bucket[i];
+        HTCarNode* nullNode = new HTCarNode(nullptr);
+        bucket[i] = nullNode;
+    };
+    cout<<bucketSize;
 };
 
 int CarsHistory::hashToInt(std::string date){
@@ -23,9 +30,9 @@ int CarsHistory::hashToInt(std::string date){
 
 void CarsHistory::insert(std::string* data){
     int header = hashToInt(data[0]);
-
     while(header>bucketSize){
         HTCarNode** tempBucket = new HTCarNode*[bucketSize*2];
+
         for(int i=0; i<bucketSize; i++){
             tempBucket[i] = bucket[i];
         }
@@ -34,7 +41,7 @@ void CarsHistory::insert(std::string* data){
         bucketSize *= 2;
     }
 
-    HTCarNode* newNode = new HTCarNode;
+    HTCarNode* newNode = new HTCarNode(nullptr);
     newNode->data = data;
     newNode->nextNode = bucket[header];
     bucket[header] = newNode;
@@ -44,16 +51,21 @@ void CarsHistory::insert(std::string* data){
 
 void CarsHistory::printDay(std::string day){
     int header = hashToInt(day);
-    if(bucket[header] == NULL){
+    if(bucket[header] == nullptr){
         std::cout<<"Error! No entry found on that date.";
         return;
     }
     HTCarNode* head = bucket[header];
-    while(head != NULL){
+    do{
         for(int i=0; i<4; i++){
-            std::cout<<bucket[header]->data[i]<<", ";
+            std::cout<<head->data[i]<<", ";
+        }
+        std::cout<<head->nextNode;
+        if(!(head->nextNode)){
+            std::cout<<head->nextNode;
+            break;
         }
         head = head->nextNode;
         std::cout<<std::endl;
-    }
+    }while(head->nextNode != nullptr);
 };

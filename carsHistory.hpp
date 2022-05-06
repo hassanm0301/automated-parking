@@ -6,7 +6,7 @@ class HTCarNode{
     public:
         std::string* data;
         HTCarNode* nextNode;
-        HTCarNode();
+        HTCarNode(nullptr_t);
 };
 
 class CarsHistory{
