@@ -4,14 +4,16 @@
 
 using namespace std;
 
+// assigns head as null as singly linked list is empty
 CarsParking::CarsParking(){
     head = NULL;
 };
 
+// adds node to list
 void CarsParking::append(std::string* data){
     DLLCarNode* new_node = new DLLCarNode;
     new_node->data = data;
-    if (head == NULL){
+    if (head == NULL){ //checks if list is empty to assign null to nextNode
         head = new_node;
         new_node -> nextNode = NULL;
         return;
@@ -23,6 +25,7 @@ void CarsParking::append(std::string* data){
 
 };
 
+// prints details of all nodes in list
 void CarsParking::printList(){
     DLLCarNode* temp = head;
     while (true){
@@ -37,6 +40,7 @@ void CarsParking::printList(){
     };
 };
 
+// appends all data to a file
 void CarsParking::fileData(ofstream* file){
     DLLCarNode* temp = head;
     while (true){
@@ -51,6 +55,7 @@ void CarsParking::fileData(ofstream* file){
     };
 };
 
+// removes a node by pointing it to null and deleting it
 void CarsParking::del(std::string vrn){
     DLLCarNode* temp = head;
     if (temp->data[1] != vrn){
@@ -69,6 +74,8 @@ void CarsParking::del(std::string vrn){
     return;
 }
 
+// gets data of particular vehicle based on vrn
+// returns pointer to array
 string* CarsParking::getData(string vrn){
     DLLCarNode* temp = new DLLCarNode;
     temp = head;
