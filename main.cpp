@@ -7,12 +7,16 @@
 
 using namespace std;
 
+
+//clears screen
 void clrScr(){
     for(int i=0; i<10; i++){
         cout<<"\n\n\n\n\n\n\n";
     }
 }
 
+
+// Calculates fee
 string calcFee(string arrival, string departure){
     int duration = 0;
     int hours = stoi(departure.substr(0,2)) - stoi(arrival.substr(0,2));
@@ -21,6 +25,7 @@ string calcFee(string arrival, string departure){
 
     duration = sec + (min*60) + (hours*60*60);
 
+    cout<<"Parking charge is: ";
     if(duration<(30*60)){
         return "FREE";
     }
@@ -40,6 +45,7 @@ string calcFee(string arrival, string departure){
 
 }
 
+// makes integer to 2 digits by adding zero in front if <10
 string twoIntegers(int oneInteger){
     if(oneInteger < 10){
         return to_string(0)+to_string(oneInteger);
@@ -47,6 +53,7 @@ string twoIntegers(int oneInteger){
     return to_string(oneInteger);
 }
 
+// gets current date to format DD/MM/YYY
 string getCurrentDate(){
     time_t now = time(0);
     tm *ltm = localtime(&now);
@@ -60,6 +67,7 @@ string getCurrentDate(){
     return arrivalDate;
 }
 
+// gets current time to format HH:MM:SS
 string getCurrentTime(){
     time_t now = time(0);
     tm *ltm = localtime(&now);
@@ -73,6 +81,8 @@ string getCurrentTime(){
     return arrivalTime;
 }
 
+// converts a line of string to array with "," as delimiter 
+// also removes whitespace after any ","
 string* lineToArr(string line)
 {
     string* lineArray = new string[4];
@@ -84,7 +94,7 @@ string* lineToArr(string line)
             lineArray[lineArrayPosition] = word;
             word = "";
             lineArrayPosition++;
-            if(line[i+1] == ' '){
+            if(line[i+1] == ' '){ // skips whitespace
                 i++;
             }
         }
@@ -95,6 +105,8 @@ string* lineToArr(string line)
     return lineArray;
 }
 
+// adds a vehicle to parking
+// takes current time as arrival time
 void addVehicle(CarsParking* parking){
     string vrn1, vrn2, vrn;
     cout<<"Enter the the first part of the VRN: ";
@@ -121,6 +133,8 @@ void addVehicle(CarsParking* parking){
     return;
 }
 
+// removes a vehicle from parking and adds it to history
+// deaprture time is current time
 void removeVehicle(CarsParking* parking, CarsHistory* history){
     string vrn1, vrn2, vrn;
     cout<<"Enter the first part of the VRN: ";
@@ -140,6 +154,7 @@ void removeVehicle(CarsParking* parking, CarsHistory* history){
     parking->del(vrn);
 }
 
+// imports details from a txt file
 void importFile(CarsParking* carsParking, CarsHistory* carsHistory){
     clrScr();
     cout<<"Enter file name"<<endl;
@@ -148,7 +163,7 @@ void importFile(CarsParking* carsParking, CarsHistory* carsHistory){
     ifstream myFile(filename);
     string myFileStr;
     while(getline(myFile, myFileStr)){
-        if(myFileStr[0] == 'D'){
+        if(myFileStr[0] == 'D'){ // removes column headers
             continue;
         }
         string* lineArr = lineToArr(myFileStr);
@@ -166,6 +181,25 @@ void importFile(CarsParking* carsParking, CarsHistory* carsHistory){
     return;
 }
 
+// Creates file to store details of history of a particular day
+// if day is today, stores cars in parking too
+void exportFile(CarsHistory* History, CarsParking* Parking){
+    string date, fileName;
+    cout<<"Enter the date to export:";
+    cin>>date;
+    cout<<endl<<"Enter the file name:";
+    cin>>fileName;
+
+    ofstream file(fileName);
+    ofstream* fileptr = &file;
+    if(date == getCurrentDate()){ // puts cars in parking to file if date is today
+        Parking->fileData(fileptr);
+    }
+    History->fileDay(fileptr, date);
+    *fileptr<<"\n";
+}
+
+// main driver function
 int main(){
     CarsParking* Parking = new CarsParking;
     CarsHistory* History = new CarsHistory;
@@ -219,6 +253,11 @@ int main(){
                 History->printDay(date);
                 break;
             }
+            case 6:
+                clrScr();
+                exportFile(History, Parking);
+                clrScr();
+                break;
             {
             case 7:
                 return 0;
