@@ -22,6 +22,7 @@ class CarsParking{
         void del(string vrn);
         string* getData(string vrn);
         void printList();
+        void fileData(ofstream* file);
 };
 
 #endif

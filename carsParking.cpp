@@ -1,5 +1,6 @@
 #include "carsParking.hpp"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -29,6 +30,20 @@ void CarsParking::printList(){
             cout<<temp->data[i]<<", ";
         }
         cout<<"\n";
+        if (temp->nextNode == NULL){
+            return;
+        }
+        temp = temp->nextNode;
+    };
+};
+
+void CarsParking::fileData(ofstream* file){
+    DLLCarNode* temp = head;
+    while (true){
+        for (int i=0; i<3; i++){
+            *file<<temp->data[i]<<", ";
+        }
+        *file<<"\n";
         if (temp->nextNode == NULL){
             return;
         }
