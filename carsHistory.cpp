@@ -1,5 +1,6 @@
 #include "carsHistory.hpp"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -67,5 +68,26 @@ void CarsHistory::printDay(std::string day){
         }
         head = head->nextNode;
         std::cout<<std::endl;
+    }while(head->nextNode != nullptr);
+};
+
+void CarsHistory::fileDay(ofstream* file, string day){
+    int header = hashToInt(day);
+    if(bucket[header] == nullptr){
+        std::cout<<"Error! No entry found on that date.";
+        return;
+    }
+    HTCarNode* head = bucket[header];
+    do{
+        for(int i=0; i<4; i++){
+            *file<<head->data[i]<<", ";
+        }
+        *file<<head->nextNode;
+        if(!(head->nextNode)){
+            *file<<head->nextNode;
+            break;
+        }
+        head = head->nextNode;
+        *file<<endl;
     }while(head->nextNode != nullptr);
 };

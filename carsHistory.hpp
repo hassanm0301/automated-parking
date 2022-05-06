@@ -2,6 +2,8 @@
 #define _CARSHISTORY_HPP_
 #include <iostream>
 
+using namespace std;
+
 class HTCarNode{
     public:
         std::string* data;
@@ -19,6 +21,7 @@ class CarsHistory{
         void insert(std::string* data);
         void printDay(std::string);
         int hashToInt(std::string date);
+        void fileDay(ofstream* file, string day);
 };
 
 #endif
