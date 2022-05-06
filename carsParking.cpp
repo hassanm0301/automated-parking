@@ -1,6 +1,7 @@
 #include "carsParking.hpp"
 #include <iostream>
 
+using namespace std;
 
 CarsParking::CarsParking(){
     head = NULL;
@@ -24,7 +25,7 @@ void CarsParking::append(std::string* data){
 void CarsParking::printList(){
     DLLCarNode* temp = head;
     while (true){
-        for (int i=0; i<4; i++){
+        for (int i=0; i<3; i++){
             cout<<temp->data[i]<<", ";
         }
         cout<<"\n";
@@ -35,10 +36,10 @@ void CarsParking::printList(){
     };
 };
 
-void CarsParking::del(std::string plateNum){
+void CarsParking::del(std::string vrn){
     DLLCarNode* temp = head;
-    if (temp->data[1] != plateNum){
-        while((temp->nextNode)->data[1] != plateNum){
+    if (temp->data[1] != vrn){
+        while((temp->nextNode)->data[1] != vrn){
                 temp = temp->nextNode;
             }
         if (temp == NULL){
@@ -51,4 +52,20 @@ void CarsParking::del(std::string plateNum){
     head = temp->nextNode;
     temp->nextNode=NULL;
     return;
+}
+
+string* CarsParking::getData(string vrn){
+    DLLCarNode* temp = new DLLCarNode;
+    temp = head;
+    if (temp->data[1] != vrn){
+        while((temp->nextNode)->data[1] != vrn && temp->nextNode != NULL){
+                temp = temp->nextNode;
+            }
+        if (temp->nextNode == NULL){
+            cout<<"No matches found for that plate number. \n";
+            return NULL;
+        };
+        return temp->nextNode->data;
+    }
+    return temp->data;
 }
